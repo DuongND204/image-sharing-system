@@ -1,0 +1,385 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin_user",
+      "email": "admin@imagesite.com",
+      "password_hash": "$2b$10$abcdefghijklmnopqrstuvwxyz123456",
+      "role": "admin",
+      "status": "active",
+      "created_at": "2024-01-15T08:30:00Z",
+      "avatar_url": "https://i.pravatar.cc/150?img=1"
+    },
+    {
+      "id": 2,
+      "username": "john_doe",
+      "email": "john@example.com",
+      "password_hash": "$2b$10$abcdefghijklmnopqrstuvwxyz123457",
+      "role": "user",
+      "status": "active",
+      "created_at": "2024-02-20T10:15:00Z",
+      "avatar_url": "https://i.pravatar.cc/150?img=2"
+    },
+    {
+      "id": 3,
+      "username": "jane_smith",
+      "email": "jane@example.com",
+      "password_hash": "$2b$10$abcdefghijklmnopqrstuvwxyz123458",
+      "role": "user",
+      "status": "active",
+      "created_at": "2024-03-10T14:20:00Z",
+      "avatar_url": "https://i.pravatar.cc/150?img=3"
+    },
+    {
+      "id": 4,
+      "username": "moderator_mike",
+      "email": "mike@imagesite.com",
+      "password_hash": "$2b$10$abcdefghijklmnopqrstuvwxyz123459",
+      "role": "moderator",
+      "status": "active",
+      "created_at": "2024-01-20T09:00:00Z",
+      "avatar_url": "https://i.pravatar.cc/150?img=4"
+    },
+    {
+      "id": 5,
+      "username": "photo_enthusiast",
+      "email": "enthusiast@example.com",
+      "password_hash": "$2b$10$abcdefghijklmnopqrstuvwxyz123460",
+      "role": "user",
+      "status": "active",
+      "created_at": "2024-04-05T16:45:00Z",
+      "avatar_url": "https://i.pravatar.cc/150?img=5"
+    }
+  ],
+  "pictures": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "title": "Sunset at the Beach",
+      "description": "Beautiful sunset captured during my vacation",
+      "image_url": "https://picsum.photos/800/600?random=1",
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-15T18:30:00Z",
+      "likes_count": 45,
+      "comments_count": 8
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "title": "Mountain Adventure",
+      "description": "Hiking in the Alps",
+      "image_url": "https://picsum.photos/800/600?random=2",
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-20T12:15:00Z",
+      "likes_count": 62,
+      "comments_count": 12
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "title": "City Lights",
+      "description": "Night photography in downtown",
+      "image_url": "https://picsum.photos/800/600?random=3",
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-22T20:00:00Z",
+      "likes_count": 38,
+      "comments_count": 5
+    },
+    {
+      "id": 4,
+      "user_id": 5,
+      "title": "Wildlife Photography",
+      "description": "A deer in the forest",
+      "image_url": "https://picsum.photos/800/600?random=4",
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-25T08:45:00Z",
+      "likes_count": 89,
+      "comments_count": 15
+    },
+    {
+      "id": 5,
+      "user_id": 3,
+      "title": "Coffee Art",
+      "description": "Latte art at my favorite cafe",
+      "image_url": "https://picsum.photos/800/600?random=5",
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-28T09:30:00Z",
+      "likes_count": 23,
+      "comments_count": 3
+    },
+    {
+      "id": 6,
+      "user_id": 2,
+      "title": "Private Moment",
+      "description": "Personal photo",
+      "image_url": "https://picsum.photos/800/600?random=6",
+      "visibility": "private",
+      "is_hidden": false,
+      "upload_date": "2024-10-29T15:20:00Z",
+      "likes_count": 0,
+      "comments_count": 0
+    }
+  ],
+  "boards": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "board_name": "Travel Memories",
+      "description": "My favorite travel photos",
+      "visibility": "public",
+      "created_at": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "board_name": "Nature Collection",
+      "description": "Beautiful nature shots",
+      "visibility": "public",
+      "created_at": "2024-10-12T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "user_id": 5,
+      "board_name": "Wildlife",
+      "description": "Animals in their natural habitat",
+      "visibility": "public",
+      "created_at": "2024-10-18T11:00:00Z"
+    }
+  ],
+  "board_pictures": [
+    {
+      "id": 1,
+      "board_id": 1,
+      "picture_id": 1,
+      "added_at": "2024-10-15T19:00:00Z"
+    },
+    {
+      "id": 2,
+      "board_id": 1,
+      "picture_id": 3,
+      "added_at": "2024-10-22T20:30:00Z"
+    },
+    {
+      "id": 3,
+      "board_id": 2,
+      "picture_id": 2,
+      "added_at": "2024-10-20T13:00:00Z"
+    },
+    {
+      "id": 4,
+      "board_id": 3,
+      "picture_id": 4,
+      "added_at": "2024-10-25T09:00:00Z"
+    }
+  ],
+  "likes": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "picture_id": 1,
+      "liked_at": "2024-10-15T19:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": 5,
+      "picture_id": 1,
+      "liked_at": "2024-10-16T10:30:00Z"
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "picture_id": 2,
+      "liked_at": "2024-10-20T14:00:00Z"
+    },
+    {
+      "id": 4,
+      "user_id": 5,
+      "picture_id": 2,
+      "liked_at": "2024-10-21T08:15:00Z"
+    },
+    {
+      "id": 5,
+      "user_id": 3,
+      "picture_id": 4,
+      "liked_at": "2024-10-25T10:00:00Z"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "picture_id": 1,
+      "user_id": 3,
+      "comment_text": "Amazing colors!",
+      "commented_at": "2024-10-15T19:15:00Z"
+    },
+    {
+      "id": 2,
+      "picture_id": 1,
+      "user_id": 5,
+      "comment_text": "This is breathtaking!",
+      "commented_at": "2024-10-16T11:00:00Z"
+    },
+    {
+      "id": 3,
+      "picture_id": 2,
+      "user_id": 2,
+      "comment_text": "Which mountain is this?",
+      "commented_at": "2024-10-20T14:30:00Z"
+    },
+    {
+      "id": 4,
+      "picture_id": 2,
+      "user_id": 3,
+      "comment_text": "It's in the Swiss Alps!",
+      "commented_at": "2024-10-20T15:00:00Z"
+    },
+    {
+      "id": 5,
+      "picture_id": 4,
+      "user_id": 3,
+      "comment_text": "Beautiful capture!",
+      "commented_at": "2024-10-25T10:30:00Z"
+    }
+  ],
+  "follows": [
+    {
+      "id": 1,
+      "follower_id": 2,
+      "following_id": 3,
+      "followed_at": "2024-10-12T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "follower_id": 3,
+      "following_id": 2,
+      "followed_at": "2024-10-13T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "follower_id": 5,
+      "following_id": 2,
+      "followed_at": "2024-10-14T09:15:00Z"
+    },
+    {
+      "id": 4,
+      "follower_id": 2,
+      "following_id": 5,
+      "followed_at": "2024-10-25T10:00:00Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "sender_id": 2,
+      "receiver_id": 3,
+      "message_text": "Hey! Love your mountain photos!",
+      "is_read": true,
+      "sent_at": "2024-10-20T16:00:00Z"
+    },
+    {
+      "id": 2,
+      "sender_id": 3,
+      "receiver_id": 2,
+      "message_text": "Thanks! Your sunset pic is amazing too!",
+      "is_read": true,
+      "sent_at": "2024-10-20T16:30:00Z"
+    },
+    {
+      "id": 3,
+      "sender_id": 5,
+      "receiver_id": 2,
+      "message_text": "Where did you take that beach photo?",
+      "is_read": false,
+      "sent_at": "2024-10-28T10:00:00Z"
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "picture_id": 3,
+      "reporter_id": 5,
+      "reason": "Inappropriate content",
+      "status": "pending",
+      "reported_at": "2024-10-27T14:00:00Z",
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "type": "like",
+      "content": "jane_smith liked your photo 'Sunset at the Beach'",
+      "related_id": 1,
+      "is_read": true,
+      "created_at": "2024-10-15T19:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "type": "comment",
+      "content": "jane_smith commented on your photo",
+      "related_id": 1,
+      "is_read": true,
+      "created_at": "2024-10-15T19:15:00Z"
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "type": "follow",
+      "content": "photo_enthusiast started following you",
+      "related_id": 5,
+      "is_read": false,
+      "created_at": "2024-10-25T10:00:00Z"
+    },
+    {
+      "id": 4,
+      "user_id": 2,
+      "type": "message",
+      "content": "You have a new message from photo_enthusiast",
+      "related_id": 3,
+      "is_read": false,
+      "created_at": "2024-10-28T10:00:00Z"
+    }
+  ],
+  "banned_keywords": [
+    {
+      "id": 1,
+      "keyword": "spam",
+      "added_by": 1,
+      "added_at": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "keyword": "inappropriate",
+      "added_by": 4,
+      "added_at": "2024-02-01T12:00:00Z"
+    }
+  ],
+  "pins": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "picture_id": 1,
+      "pinned_at": "2024-10-16T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "picture_id": 2,
+      "pinned_at": "2024-10-21T09:00:00Z"
+    },
+    {
+      "id": 3,
+      "user_id": 5,
+      "picture_id": 4,
+      "pinned_at": "2024-10-25T11:00:00Z"
+    }
+  ]
+}
