@@ -1,70 +1,249 @@
-# Getting Started with Create React App
+# PinPhoto - Pinterest-like Image Sharing System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based image sharing application similar to Pinterest with a fake backend using json-server.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Home Page (Feed)**
+  - Masonry grid layout for images
+  - Real-time search functionality (searches both image titles and descriptions)
+  - Category filtering (Travel, Nature, Wildlife, Urban, Food, Fashion, Art, Technology)
+  - User information on each image card
+  - Like and comment counts
 
-### `npm start`
+- **Image Detail Page**
+  - Full image view
+  - Complete image information (title, description)
+  - User details (avatar, username, email)
+  - View statistics (likes, comments, upload date)
+  - Comment section with ability to add new comments
+  - Action buttons (Like, Save, Share)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Backend**
+  - JSON-based database with multiple resources
+  - Mock users, images, categories, comments
+  - RESTful API via json-server
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+```
+image-sharing-system/
+├── src/
+│   ├── components/          # Reusable components
+│   │   ├── Header.js
+│   │   ├── CategoryFilter.js
+│   │   ├── ImageCard.js
+│   │   ├── ImageGrid.js
+│   │   └── LoadingSpinner.js
+│   ├── pages/               # Page components
+│   │   ├── Home.js
+│   │   └── ImageDetail.js
+│   ├── styles/              # CSS files
+│   │   ├── Header.css
+│   │   ├── CategoryFilter.css
+│   │   ├── ImageCard.css
+│   │   ├── ImageGrid.css
+│   │   ├── LoadingSpinner.css
+│   │   ├── Home.css
+│   │   └── ImageDetail.css
+│   ├── App.js
+│   ├── App.css
+│   └── index.js
+├── public/
+├── database.json            # Mock database
+├── package.json
+└── README.md
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (v6 or higher)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Setup
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Install dependencies:
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Start the development environment (both frontend and backend):
+```bash
+npm run dev
+```
 
-### `npm run eject`
+This command runs:
+- **Frontend**: React app on `http://localhost:3000`
+- **Backend**: JSON Server API on `http://localhost:5000`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Alternative: Run separately
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Frontend only:**
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Backend only (in a separate terminal):**
+```bash
+npm run server
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API Endpoints
 
-## Learn More
+The json-server provides the following endpoints:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `GET /pictures` - Get all images
+- `GET /pictures/:id` - Get image by ID
+- `GET /users` - Get all users
+- `GET /users/:id` - Get user by ID
+- `GET /categories` - Get all categories
+- `GET /comments` - Get all comments
+- `GET /comments?picture_id=:id` - Get comments for a specific image
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Component Structure
 
-### Code Splitting
+### Header Component
+- Search bar with real-time search functionality
+- Sticky header with gradient background
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### CategoryFilter Component
+- Horizontal scrollable category buttons
+- Active state highlighting
+- Category icons and names
 
-### Analyzing the Bundle Size
+### ImageCard Component
+- Image preview with hover effects
+- User information
+- Like and comment counts
+- Links to image detail page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### ImageGrid Component
+- Responsive masonry grid layout
+- Automatically adjusts columns based on screen size
+- No results message
 
-### Making a Progressive Web App
+### Home Page
+- Integrates Header, CategoryFilter, and ImageGrid
+- Manages search and filter state
+- Fetches data from JSON server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### ImageDetail Page
+- Full image view
+- User details section
+- Comments section
+- Action buttons
+- Back to home navigation
 
-### Advanced Configuration
+## Styling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The application uses CSS Grid for the image layout, providing:
+- **Desktop**: 4-6 columns
+- **Tablet**: 2-3 columns
+- **Mobile**: 2 columns
+- Responsive padding and gap
 
-### Deployment
+Features include:
+- Smooth transitions and hover effects
+- Gradient backgrounds
+- Custom scrollbar styling
+- Mobile-first approach
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Data Structure
 
-### `npm run build` fails to minify
+### Picture Object
+```json
+{
+  "id": 1,
+  "user_id": 2,
+  "title": "Image Title",
+  "description": "Image description",
+  "image_url": "https://...",
+  "category_id": 1,
+  "visibility": "public",
+  "is_hidden": false,
+  "upload_date": "2024-10-15T18:30:00Z",
+  "likes_count": 45,
+  "comments_count": 8
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Category Object
+```json
+{
+  "id": 1,
+  "name": "Travel",
+  "icon": "✈️"
+}
+```
+
+### User Object
+```json
+{
+  "id": 1,
+  "username": "john_doe",
+  "email": "john@example.com",
+  "avatar_url": "https://...",
+  "role": "user"
+}
+```
+
+### Comment Object
+```json
+{
+  "id": 1,
+  "picture_id": 1,
+  "user_id": 2,
+  "comment_text": "Great photo!",
+  "commented_at": "2024-10-15T19:15:00Z"
+}
+```
+
+## Key Features Implementation
+
+### Search Functionality
+- Searches both image title and description
+- Real-time filtering as user types
+- Case-insensitive
+
+### Category Filter
+- Displays 8 categories with icons
+- Can select "All" to show all images
+- Combines with search filter
+
+### Responsive Design
+- Mobile-first approach
+- Breakpoints: 480px, 768px, 1024px, 1200px
+- Adapts layout, font sizes, and spacing
+
+## Future Enhancements
+
+- User authentication
+- Like/Unlike functionality
+- Save to collections
+- User profiles
+- Follow users
+- Direct messaging
+- Image upload
+- Advanced filters (date, popularity)
+- Infinite scroll
+
+## Technologies Used
+
+- **Frontend**: React 19
+- **Routing**: React Router v6
+- **Backend**: json-server
+- **Styling**: CSS3 with Flexbox and Grid
+- **HTTP Client**: Fetch API
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers
+
+## License
+
+MIT License

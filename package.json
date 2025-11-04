@@ -9,11 +9,18 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "json-server": "^0.17.4",
+    "concurrently": "^8.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "json-server --watch database.json --port 5000",
+    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "api": "npm --prefix server run start",
+    "api:dev": "npm --prefix server run dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

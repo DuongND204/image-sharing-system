@@ -1,0 +1,205 @@
+.user-manager {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.um-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem; /* cách lề trên một chút */
+  padding-right: 0.75rem; /* cách lề phải một chút */
+}
+
+.um-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.um-upload-btn {
+  background: #e60023;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  margin-right: 0.25rem; /* đẩy xa lề phải */
+  margin-top: 0.25rem; /* đẩy xa lề trên */
+}
+
+.um-upload-btn:hover { opacity: 0.9; }
+
+/* Masonry layout similar to Pinterest */
+.masonry-grid {
+  column-count: 5;
+  column-gap: 1rem;
+}
+
+@media (max-width: 1400px) { .masonry-grid { column-count: 4; } }
+@media (max-width: 1024px) { .masonry-grid { column-count: 3; } }
+@media (max-width: 768px)  { .masonry-grid { column-count: 2; } }
+@media (max-width: 520px)  { .masonry-grid { column-count: 1; } }
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+.pin-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.pin-media { position: relative; }
+.pin-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pin-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  left: auto;
+  bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.pin-card:hover .pin-actions { opacity: 1; }
+
+.pin-btn {
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.6rem; /* gọn hơn */
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pin-btn.danger { background: #b00020; }
+
+.pin-meta { padding: 0.75rem; }
+.pin-title { font-weight: 700; margin-bottom: 0.25rem; }
+.pin-desc { font-size: 0.9rem; color: #555; }
+
+.um-loading { text-align: center; padding: 2rem 0; }
+
+/* Modal */
+.um-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.um-modal {
+  width: 100%;
+  max-width: 720px; /* nhỏ lại */
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 85vh; /* hạn chế chiều cao tổng */
+  display: flex;
+  flex-direction: column;
+}
+
+.um-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  flex: 0 0 auto;
+}
+
+.um-modal-title { font-weight: 700; }
+.um-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.um-form {
+  display: grid;
+  grid-template-columns: 2fr 3fr; /* làm cột trái nhỏ hơn */
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto; /* nội dung cuộn thay vì kéo modal quá dài */
+  flex: 1 1 auto;
+}
+
+/* Left: big dropzone */
+.um-dropzone {
+  background: #f0f0ec;
+  border-radius: 24px;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* luôn vuông như mẫu */
+  max-width: 300px; /* kích thước tương tự hình mẫu */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px dashed transparent;
+  transition: border-color .2s ease, background .2s ease;
+  margin: 0 auto; /* canh giữa card bên trái */
+  padding: 12px;
+}
+.um-dropzone.dragging { border-color: #111; background: #eaeae6; }
+.um-dropzone img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+.um-dropzone-empty { text-align: center; color: #333; }
+.um-dropzone-icon { font-size: 1.5rem; margin-bottom: .5rem; }
+.um-dropzone-hint { color: #666; font-size: .9rem; margin-top: .75rem; line-height: 1.4; }
+
+/* Right: fields stack */
+.um-right { display: flex; flex-direction: column; gap: .6rem; }
+.um-right label { font-weight: 600; }
+.um-right input, .um-right select, .um-right textarea {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #efefec;
+}
+
+.um-checkbox { display: flex; align-items: center; gap: 8px; }
+
+.um-actions { display: flex; justify-content: flex-end; gap: 8px; }
+.um-actions button {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.um-actions button.secondary { background: #e0e0e0; color: #111; }
+
+@media (max-width: 1024px) {
+  .um-modal { max-width: 85vw; }
+  .um-form { grid-template-columns: 1fr; }
+  .um-dropzone { aspect-ratio: 1/1; max-width: 320px; }
+}
+
+@media (max-width: 720px) {
+  .um-form { grid-template-columns: 1fr; }
+  .um-dropzone { aspect-ratio: 1/1; max-width: 280px; }
+}
+
+
