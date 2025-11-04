@@ -51,13 +51,56 @@
       "avatar_url": "https://i.pravatar.cc/150?img=5"
     }
   ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Travel",
+      "icon": "✈️"
+    },
+    {
+      "id": 2,
+      "name": "Nature",
+      "icon": "🌿"
+    },
+    {
+      "id": 3,
+      "name": "Wildlife",
+      "icon": "🦁"
+    },
+    {
+      "id": 4,
+      "name": "Urban",
+      "icon": "🏙️"
+    },
+    {
+      "id": 5,
+      "name": "Food",
+      "icon": "🍽️"
+    },
+    {
+      "id": 6,
+      "name": "Fashion",
+      "icon": "👗"
+    },
+    {
+      "id": 7,
+      "name": "Art",
+      "icon": "🎨"
+    },
+    {
+      "id": 8,
+      "name": "Technology",
+      "icon": "💻"
+    }
+  ],
   "pictures": [
     {
       "id": 1,
       "user_id": 2,
       "title": "Sunset at the Beach",
-      "description": "Beautiful sunset captured during my vacation",
+      "description": "Beautiful sunset captured during my vacation at the golden hour",
       "image_url": "https://picsum.photos/800/600?random=1",
+      "category_id": 1,
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-15T18:30:00Z",
@@ -68,8 +111,9 @@
       "id": 2,
       "user_id": 3,
       "title": "Mountain Adventure",
-      "description": "Hiking in the Alps",
+      "description": "Hiking in the Alps, snow-capped peaks and fresh mountain air",
       "image_url": "https://picsum.photos/800/600?random=2",
+      "category_id": 1,
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-20T12:15:00Z",
@@ -80,8 +124,9 @@
       "id": 3,
       "user_id": 2,
       "title": "City Lights",
-      "description": "Night photography in downtown",
+      "description": "Night photography in downtown, neon signs and urban beauty",
       "image_url": "https://picsum.photos/800/600?random=3",
+      "category_id": 4,
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-22T20:00:00Z",
@@ -92,8 +137,9 @@
       "id": 4,
       "user_id": 5,
       "title": "Wildlife Photography",
-      "description": "A deer in the forest",
+      "description": "A deer in the forest, captured in its natural habitat",
       "image_url": "https://picsum.photos/800/600?random=4",
+      "category_id": 3,
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-25T08:45:00Z",
@@ -104,8 +150,9 @@
       "id": 5,
       "user_id": 3,
       "title": "Coffee Art",
-      "description": "Latte art at my favorite cafe",
+      "description": "Latte art at my favorite cafe, perfect pour and design",
       "image_url": "https://picsum.photos/800/600?random=5",
+      "category_id": 5,
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-28T09:30:00Z",
@@ -115,14 +162,67 @@
     {
       "id": 6,
       "user_id": 2,
-      "title": "Private Moment",
-      "description": "Personal photo",
+      "title": "Spring Forest",
+      "description": "Green leaves and flowering trees in spring season",
       "image_url": "https://picsum.photos/800/600?random=6",
-      "visibility": "private",
+      "category_id": 2,
+      "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-29T15:20:00Z",
-      "likes_count": 0,
-      "comments_count": 0
+      "likes_count": 56,
+      "comments_count": 9
+    },
+    {
+      "id": 7,
+      "user_id": 5,
+      "title": "Modern Art Gallery",
+      "description": "Contemporary art installation with vibrant colors",
+      "image_url": "https://picsum.photos/800/600?random=7",
+      "category_id": 7,
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-30T10:15:00Z",
+      "likes_count": 34,
+      "comments_count": 7
+    },
+    {
+      "id": 8,
+      "user_id": 3,
+      "title": "Tech Conference",
+      "description": "Innovation and technology demonstration at the conference",
+      "image_url": "https://picsum.photos/800/600?random=8",
+      "category_id": 8,
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-10-31T14:00:00Z",
+      "likes_count": 41,
+      "comments_count": 10
+    },
+    {
+      "id": 9,
+      "user_id": 2,
+      "title": "Fashion Week",
+      "description": "Stunning fashion collection showcase at the runway",
+      "image_url": "https://picsum.photos/800/600?random=9",
+      "category_id": 6,
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-11-01T11:30:00Z",
+      "likes_count": 67,
+      "comments_count": 14
+    },
+    {
+      "id": 10,
+      "user_id": 5,
+      "title": "Tropical Beach",
+      "description": "Crystal clear waters and pristine sandy beach paradise",
+      "image_url": "https://picsum.photos/800/600?random=10",
+      "category_id": 1,
+      "visibility": "public",
+      "is_hidden": false,
+      "upload_date": "2024-11-02T09:45:00Z",
+      "likes_count": 78,
+      "comments_count": 11
     }
   ],
   "boards": [
