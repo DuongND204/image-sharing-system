@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import ImageDetail from './pages/ImageDetail';
 import UserManager from './pages/UserManager';
 import './App.css';
+import AdminUI from './usermanagement/AdminUI';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/image/:id" element={<ImageDetail />} />
         <Route path="/image/:source/:id" element={<ImageDetail />} />
         <Route path="/user" element={<UserManager />} />
+        <Route path="/admin" element={<AdminUI />} />
       </Routes>
     </Router>
   );
