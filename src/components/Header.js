@@ -5,7 +5,7 @@ import { useAuthStore } from '../store/useAuthStore';
 import { useNavigate } from 'react-router-dom';
 
 function Header({ searchQuery, onSearchChange }) {
-  const { isLoggedIn, logout, authUser } = useAuthStore();
+  const { isAuthenticated, logout, authUser } = useAuthStore();
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
@@ -30,7 +30,7 @@ function Header({ searchQuery, onSearchChange }) {
           <button className='search-btn'>🔍</button>
         </div>
         <div className='user-menu'>
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <div className='flex gap-2'>
               <Link to='/user' className='user-btn' title='Quản lý ảnh'>
                 👤 {authUser.username}
