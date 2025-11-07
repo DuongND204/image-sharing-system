@@ -35,6 +35,7 @@ A complete **Pinterest-like image sharing web application** with React frontend 
 ## 📂 Files Created
 
 ### Components (5 files)
+
 ```
 src/components/
 ├── Header.js              # Search bar + navigation
@@ -45,6 +46,7 @@ src/components/
 ```
 
 ### Pages (2 files)
+
 ```
 src/pages/
 ├── Home.js                # Main feed page
@@ -52,6 +54,7 @@ src/pages/
 ```
 
 ### Styles (7 files)
+
 ```
 src/styles/
 ├── Header.css             # Header styling
@@ -64,6 +67,7 @@ src/styles/
 ```
 
 ### Updated Files (3 files)
+
 ```
 src/
 ├── App.js                 # React Router setup
@@ -77,6 +81,7 @@ Root/
 ```
 
 ### Documentation (2 files)
+
 ```
 ├── README.md              # Full documentation
 └── QUICK_START.md         # Quick start guide
@@ -87,6 +92,7 @@ Root/
 ## 🎯 Core Features Implemented
 
 ### 1. Home Page
+
 - ✅ Masonry grid layout (responsive)
 - ✅ Real-time search (title + description)
 - ✅ Category filtering (8 categories)
@@ -97,6 +103,7 @@ Root/
 - ✅ No results message
 
 ### 2. Image Detail Page
+
 - ✅ Full image view
 - ✅ Image metadata (title, description)
 - ✅ User profile section (avatar, username, email)
@@ -107,6 +114,7 @@ Root/
 - ✅ Responsive layout
 
 ### 3. Component Architecture
+
 - ✅ Modular, reusable components
 - ✅ Proper separation of concerns
 - ✅ Props-based communication
@@ -114,6 +122,7 @@ Root/
 - ✅ Responsive design in each component
 
 ### 4. Styling Features
+
 - ✅ Modern gradient backgrounds
 - ✅ Smooth animations and transitions
 - ✅ Hover effects on interactive elements
@@ -122,6 +131,7 @@ Root/
 - ✅ Mobile-first approach
 
 ### 5. Backend (json-server)
+
 - ✅ RESTful API endpoints
 - ✅ Mock database with sample data
 - ✅ 8 image categories
@@ -135,17 +145,20 @@ Root/
 ## 💻 Technology Stack
 
 ### Frontend
+
 - **React 19.2.0** - UI library
 - **React Router v6** - Client-side routing
 - **CSS3** - Styling (Flexbox, Grid)
 - **Fetch API** - HTTP requests
 
 ### Backend
+
 - **json-server 0.17.4** - Fake REST API
 - **concurrently 8.2.2** - Run multiple processes
 - **database.json** - Data storage
 
 ### Development Tools
+
 - **React Scripts 5.0.1** - Build tools
 - **npm** - Package manager
 
@@ -154,17 +167,20 @@ Root/
 ## 🚀 How to Run
 
 ### Installation
+
 ```bash
 cd image-sharing-system
 npm install
 ```
 
 ### Start Development Environment
+
 ```bash
 npm run dev
 ```
 
 This starts:
+
 - React Frontend on `http://localhost:3000`
 - JSON Server Backend on `http://localhost:5000`
 
@@ -173,6 +189,7 @@ This starts:
 ## 🔄 Data Flow
 
 ### 1. Home Page Load
+
 ```
 Home.js mounts
     ↓
@@ -189,6 +206,7 @@ Render components with data
 ```
 
 ### 2. Search & Filter
+
 ```
 User types in search bar
     ↓
@@ -202,6 +220,7 @@ ImageGrid re-renders with filtered data
 ```
 
 ### 3. Image Detail Navigation
+
 ```
 User clicks image card
     ↓
@@ -222,6 +241,7 @@ Display full image with all details
 ## 📊 Sample Data
 
 ### Images (10 total)
+
 - Sunset at the Beach (Travel)
 - Mountain Adventure (Travel)
 - City Lights (Urban)
@@ -234,6 +254,7 @@ Display full image with all details
 - Tropical Beach (Travel)
 
 ### Categories (8 total)
+
 1. ✈️ Travel
 2. 🌿 Nature
 3. 🦁 Wildlife
@@ -244,6 +265,7 @@ Display full image with all details
 8. 💻 Technology
 
 ### Users (5 total)
+
 - admin_user (admin)
 - john_doe (user)
 - jane_smith (user)
@@ -255,6 +277,7 @@ Display full image with all details
 ## 🎨 Design Highlights
 
 ### Color Scheme
+
 - **Primary Gradient**: #667eea → #764ba2 (Purple/Blue)
 - **Background**: #f8f9fa (Light Gray)
 - **White**: #ffffff (Cards/Content)
@@ -262,6 +285,7 @@ Display full image with all details
 - **Accent**: #667eea (Purple)
 
 ### Layout
+
 - **Grid System**: CSS Grid for responsive layout
 - **Desktop**: 4-6 columns
 - **Tablet**: 2-3 columns
@@ -269,6 +293,7 @@ Display full image with all details
 - **Gaps**: 1rem - 2rem (responsive)
 
 ### Animations
+
 - Card hover: translateY(-8px)
 - Image zoom: scale(1.05)
 - Transitions: 0.3s ease
@@ -279,6 +304,7 @@ Display full image with all details
 ## 🔗 API Endpoints
 
 ### Pictures
+
 ```
 GET  /pictures              Get all images
 GET  /pictures/:id          Get image by ID
@@ -286,17 +312,20 @@ GET  /pictures?category_id=1 Filter by category (query param)
 ```
 
 ### Users
+
 ```
 GET  /users                 Get all users
 GET  /users/:id             Get user by ID
 ```
 
 ### Categories
+
 ```
 GET  /categories            Get all categories
 ```
 
 ### Comments
+
 ```
 GET  /comments              Get all comments
 GET  /comments?picture_id=1 Get comments for image
@@ -307,24 +336,28 @@ GET  /comments?picture_id=1 Get comments for image
 ## 📱 Responsive Design
 
 ### Desktop (1200px+)
+
 - 4-6 image columns
 - Full header with search
 - Horizontal category scroll
 - Large image detail layout
 
 ### Tablet (768px-1199px)
+
 - 2-3 image columns
 - Compact header
 - Same category scroll
 - Side-by-side detail layout
 
 ### Mobile (480px-767px)
+
 - 2 image columns
 - Stacked header
 - Category scroll with overflow
 - Stacked detail layout
 
 ### Small Mobile (<480px)
+
 - 2 image columns
 - Minimal padding
 - Compact buttons
@@ -335,6 +368,7 @@ GET  /comments?picture_id=1 Get comments for image
 ## 🎓 Educational Value
 
 This project teaches:
+
 - React component architecture
 - React hooks (useState, useEffect)
 - React Router for navigation
@@ -367,29 +401,34 @@ This project teaches:
 ## ✨ Project Highlights
 
 ✅ **Production-Ready Code**
+
 - Clean, well-organized structure
 - Reusable components
 - Proper separation of concerns
 - Easy to maintain and extend
 
 ✅ **Beautiful UI/UX**
+
 - Modern gradient design
 - Smooth animations
 - Intuitive navigation
 - Great user experience
 
 ✅ **Fully Responsive**
+
 - Works on all device sizes
 - Mobile-first approach
 - Tested breakpoints
 
 ✅ **Well Documented**
+
 - Comprehensive README
 - Quick start guide
 - Code comments
 - This summary
 
 ✅ **Easy to Run**
+
 - Simple npm commands
 - Concurrent execution
 - Zero configuration needed
@@ -401,14 +440,17 @@ This project teaches:
 ### Common Issues & Solutions
 
 1. **Port already in use**
+
    - Kill process using the port
    - Or change port in scripts
 
 2. **Images not loading**
+
    - Ensure json-server is running
    - Check browser console for errors
 
 3. **Search not working**
+
    - Check if data is loaded
    - Verify search implementation in Home.js
 
@@ -421,6 +463,7 @@ This project teaches:
 ## 🎉 Conclusion
 
 You now have a **fully functional, production-ready Pinterest-like application** with:
+
 - Beautiful, responsive UI
 - Working search and filter
 - Image detail view

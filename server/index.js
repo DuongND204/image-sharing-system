@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 
 import usersRouter from './routes/users.js';
 import imagesRouter from './routes/images.js';
+import authRouter from './routes/auth.js';
 
 dotenv.config();
 
@@ -28,13 +29,15 @@ app.use('/uploads', express.static(uploadsDir));
 // Routes
 app.use('/api/users', usersRouter);
 app.use('/api/images', imagesRouter);
+app.use('/api/auth', authRouter);
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
 });
 
 // Mongo connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/image_sharing_system';
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/image_sharing_system';
 const PORT = process.env.PORT || 4000;
 
 mongoose
@@ -48,5 +51,3 @@ mongoose
     console.error('Failed to connect to MongoDB:', err.message);
     process.exit(1);
   });
-
-
