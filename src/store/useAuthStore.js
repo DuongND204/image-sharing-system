@@ -2,14 +2,10 @@ import { create } from 'zustand';
 import toast from 'react-hot-toast';
 import { users as seedUsers } from '../data/users';
 
+
 export const useAuthStore = create((set, get) => ({
   authUser: JSON.parse(localStorage.getItem('auth-user')) || null,
   isAuthenticated: false,
-
-  isLoggedIn: () => {
-    const { authUser } = get();
-    return !!authUser;
-  },
 
   login: (email, password) => {
     try {
