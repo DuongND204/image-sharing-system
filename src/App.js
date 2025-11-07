@@ -5,6 +5,7 @@ import UserManager from './pages/UserManager';
 import LoginPage from './pages/auth/Login';
 import RegisterPage from './pages/auth/Register';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminUI from './usermanagement/AdminUI';
 
 function App() {
   return (
@@ -35,6 +36,14 @@ function App() {
           element={
             <ProtectedRoute>
               <UserManager />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/admin'
+          element={
+            <ProtectedRoute>
+              <AdminUI />
             </ProtectedRoute>
           }
         />
