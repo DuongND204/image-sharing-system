@@ -3,30 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
 
 export default function LoginPage() {
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: 'admin@imagesite.com',
-    password: '123456',
+    email: 'test@gmail.com',
+    password: '123123',
   });
 
-  const { login, isLoggingIn } = useAuthStore();
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
-      return;
-    }
-    const success = login(formData.email, formData.password);
-    if (success) {
+    const response = await login(formData);
+    if (response.success) {
       navigate('/');
     }
   };
@@ -91,7 +79,9 @@ export default function LoginPage() {
                     className='block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white'
                     placeholder='your@email.com'
                     value={formData.email}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -128,7 +118,9 @@ export default function LoginPage() {
                     className='block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white'
                     placeholder='••••••••'
                     value={formData.password}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -136,79 +128,32 @@ export default function LoginPage() {
 
             <button
               type='submit'
-              disabled={isLoggingIn}
-              className='w-full flex justify-center items-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
+              className='w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
             >
-              {isLoggingIn ? (
-                <div className='flex items-center'>
-                  <svg
-                    className='animate-spin -ml-1 mr-3 h-5 w-5 text-white'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                  >
-                    <circle
-                      className='opacity-25'
-                      cx='12'
-                      cy='12'
-                      r='10'
-                      stroke='currentColor'
-                      strokeWidth='4'
-                    ></circle>
-                    <path
-                      className='opacity-75'
-                      fill='currentColor'
-                      d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-                    ></path>
-                  </svg>
-                  Đang đăng nhập...
-                </div>
-              ) : (
-                <>
-                  Đăng nhập
-                  <svg
-                    className='ml-2 w-5 h-5'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M13 7l5 5m0 0l-5 5m5-5H6'
-                    />
-                  </svg>
-                </>
-              )}
+              Đăng nhập
             </button>
-
-            <div className='bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 border border-indigo-100'>
-              <p className='text-sm text-gray-700 text-center mb-2 font-medium'>
-                🎯 Tài khoản demo
-              </p>
-              <div className='flex items-center justify-center gap-2 flex-wrap'>
-                <code className='bg-white px-3 py-1.5 rounded-lg text-sm font-mono text-indigo-600 border border-indigo-200'>
-                  admin@imagesite.com
-                </code>
-                <span className='text-gray-400'>/</span>
-                <code className='bg-white px-3 py-1.5 rounded-lg text-sm font-mono text-indigo-600 border border-indigo-200'>
-                  123456
-                </code>
-              </div>
-            </div>
           </form>
 
-          <div className='mt-6 text-center'>
-            <p className='text-sm text-gray-600'>
-              Chưa có tài khoản?{' '}
+          <div className='mt-6 space-y-3'>
+            <div className='text-center'>
               <Link
-                to='/register'
-                className='font-semibold text-indigo-600 hover:text-indigo-700 transition-colors duration-200'
+                to='/forgot-password'
+                className='text-sm font-medium text-indigo-600 hover:text-indigo-700 transition-colors duration-200'
               >
-                Đăng ký ngay →
+                Quên mật khẩu?
               </Link>
-            </p>
+            </div>
+            <div className='text-center'>
+              <p className='text-sm text-gray-600'>
+                Chưa có tài khoản?{' '}
+                <Link
+                  to='/register'
+                  className='font-semibold text-indigo-600 hover:text-indigo-700 transition-colors duration-200'
+                >
+                  Đăng ký ngay
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

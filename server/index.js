@@ -5,10 +5,11 @@ import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-
 import usersRouter from './routes/users.js';
 import imagesRouter from './routes/images.js';
 import authRouter from './routes/auth.js';
+import connectDb from './configs/db.js';
+const PORT = process.env.PORT || 4000;
 
 dotenv.config();
 
@@ -35,19 +36,16 @@ app.get('/api/health', (req, res) => {
   res.json({ ok: true });
 });
 
-// Mongo connection
-const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/image_sharing_system';
-const PORT = process.env.PORT || 4000;
-
-mongoose
-  .connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
-  .then(() => {
+async function startServer() {
+  try {
+    await connectDb();
     app.listen(PORT, () => {
-      console.log(`API running on http://localhost:${PORT}`);
+      console.log(`Server running on http://localhost:${PORT}`);
     });
-  })
-  .catch((err) => {
-    console.error('Failed to connect to MongoDB:', err.message);
+  } catch (error) {
+    console.error('Failed to start server:', error);
     process.exit(1);
-  });
+  }
+}
+
+startServer();

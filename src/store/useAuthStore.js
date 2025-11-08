@@ -1,81 +1,113 @@
 import { create } from 'zustand';
 import toast from 'react-hot-toast';
-import { users as seedUsers } from '../data/users';
+import { persist } from 'zustand/middleware';
+import axiosInstance from '../lib/axios';
 
+export const useAuthStore = create(
+  persist(
+    (set, get) => ({
+      user: null,
+      token: null,
+      isAuthenticated: false,
 
-export const useAuthStore = create((set, get) => ({
-  authUser: JSON.parse(localStorage.getItem('auth-user')) || null,
-  isAuthenticated: false,
+      login: async (formData) => {
+        try {
+          const response = await axiosInstance.post('/auth/login', formData);
+          if (response.data) {
+            set({
+              user: response.data.user,
+              token: response.data.token,
+              isAuthenticated: true,
+            });
+            toast.success('Đăng nhập thành công!');
+            return { success: true, data: response.data };
+          }
+        } catch (error) {
+          toast.error(
+            error.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại'
+          );
+          return { success: false, data: null };
+        }
+      },
+      register: async (formData) => {
+        try {
+          const response = await axiosInstance.post('/auth/register', formData);
+          if (response.data) {
+            set({
+              user: response.data.user,
+              token: response.data.token,
+              isAuthenticated: true,
+            });
+            toast.success('Đăng ký thành công!');
+          }
+        } catch (error) {
+          toast.error(
+            error.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại'
+          );
+        }
+      },
+      logout: () => {
+        set({
+          user: null,
+          token: null,
+          isAuthenticated: false,
+        });
+        toast.success('Đăng xuất thành công!');
+      },
 
-  login: (email, password) => {
-    try {
-      const user = seedUsers.find(
-        (u) => u.email === email && u.password === password
-      );
-      if (!user) {
-        toast.error('Email hoặc mật khẩu không đúng!');
-        return false;
-      }
-      if (user.status !== 'active') {
-        toast.error('Tài khoản của bạn đã bị khóa!');
-        return false;
-      }
-      const authUser = {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        avatar_url: user.avatar_url,
-      };
+      forgotPassword: async (email) => {
+        try {
+          const response = await axiosInstance.post('/auth/forgot-password', {
+            email,
+          });
+          if (response.data) {
+            toast.success('Email khôi phục mật khẩu đã được gửi!');
+            return { success: true, data: response.data };
+          }
+        } catch (error) {
+          const errorMessage =
+            error.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại';
+          toast.error(errorMessage);
+          throw error;
+        }
+      },
 
-      set({ authUser, isAuthenticated: true });
-      localStorage.setItem('auth-user', JSON.stringify(authUser));
-      toast.success('Đăng nhập thành công!');
-
-      return true;
-    } catch (error) {
-      console.error('Lỗi đăng nhập:', error);
-      toast.error('Có lỗi xảy ra khi đăng nhập!');
-      return false;
+      resetPassword: async (token, email, password, confirmPassword) => {
+        try {
+          const response = await axiosInstance.put(
+            `/auth/reset-password?token=${token}&email=${encodeURIComponent(
+              email
+            )}`,
+            { password, confirmPassword }
+          );
+          if (response.data) {
+            toast.success('Đặt lại mật khẩu thành công!');
+            return { success: true, data: response.data };
+          }
+        } catch (error) {
+          const errorMessage =
+            error.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại';
+          toast.error(errorMessage);
+          throw error;
+        }
+      },
+      // Initialize auth state (gọi khi app khởi động)
+      initializeAuth: () => {
+        const { token, user } = get();
+        if (token && user) {
+          set({ isAuthenticated: true });
+        } else {
+          set({ isAuthenticated: false });
+        }
+      },
+    }),
+    {
+      name: 'auth-data',
+      partialize: (state) => ({
+        user: state.user,
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+      }),
     }
-  },
-
-  // Đăng ký
-  register: (userData) => {
-    try {
-      const newUser = {
-        id: seedUsers.length + 1,
-        username: userData.username,
-        email: userData.email,
-        password: userData.password,
-        role: 'user',
-        status: 'active',
-        created_at: new Date().toISOString(),
-        avatar_url: `https://i.pravatar.cc/150?img=${
-          Math.floor(Math.random() * 70) + 1
-        }`,
-      };
-      const authUser = {
-        id: newUser.id,
-        username: newUser.username,
-        email: newUser.email,
-        role: newUser.role,
-        avatar_url: newUser.avatar_url,
-      };
-      set({ authUser, isAuthenticated: true });
-      localStorage.setItem('auth-user', JSON.stringify(authUser));
-      toast.success('Đăng ký thành công!');
-      return true;
-    } catch (error) {
-      console.error('Lỗi đăng ký:', error);
-      toast.error('Có lỗi xảy ra khi đăng ký!');
-      return false;
-    }
-  },
-
-  logout: () => {
-    set({ authUser: null, isAuthenticated: false });
-    localStorage.removeItem('auth-user');
-    toast.success('Đã đăng xuất!');
-  },
-}));
+  )
+);

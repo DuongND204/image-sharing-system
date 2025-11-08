@@ -9,14 +9,19 @@ const router = Router();
 // Multer storage for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(process.cwd(), 'image-sharing-system', 'server', 'uploads');
+    const dir = path.join(
+      process.cwd(),
+      'image-sharing-system',
+      'server',
+      'uploads'
+    );
     fs.mkdirSync(dir, { recursive: true });
     cb(null, dir);
   },
   filename: (_req, file, cb) => {
     const ext = path.extname(file.originalname) || '.bin';
     cb(null, `${Date.now()}-${Math.random().toString(36).slice(2)}${ext}`);
-  }
+  },
 });
 const upload = multer({ storage });
 
@@ -48,7 +53,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
       imageUrl: relative,
       categoryId: req.body.categoryId ? Number(req.body.categoryId) : null,
       visibility: req.body.visibility || 'public',
-      isHidden: req.body.isHidden === 'true'
+      isHidden: req.body.isHidden === 'true',
     });
     res.status(201).json(image);
   } catch (e) {
@@ -78,7 +83,9 @@ router.get('/:id', async (req, res) => {
 // Update
 router.put('/:id', async (req, res) => {
   try {
-    const image = await Image.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const image = await Image.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (!image) return res.status(404).json({ message: 'Not found' });
     res.json(image);
   } catch (e) {
@@ -98,5 +105,3 @@ router.delete('/:id', async (req, res) => {
 });
 
 export default router;
-
-

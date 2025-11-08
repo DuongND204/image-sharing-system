@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import '../styles/Header.css';
 import { useAuthStore } from '../store/useAuthStore';
 import { useNavigate } from 'react-router-dom';
+import { LogOut } from 'lucide-react';
 
 function Header({ searchQuery, onSearchChange }) {
-  const { isAuthenticated, logout, authUser } = useAuthStore();
+  const { isAuthenticated, logout, user } = useAuthStore();
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
@@ -32,15 +33,21 @@ function Header({ searchQuery, onSearchChange }) {
         <div className='user-menu'>
           {isAuthenticated ? (
             <div className='flex gap-2'>
-              <Link to='/user' className='user-btn' title='Quản lý ảnh'>
-                👤 {authUser.username}
-              </Link>
-              <button
-                className='user-btn'
-                title='Đăng xuất'
-                onClick={handleLogout}
-              >
-                Đăng xuất
+              <div className='user-btn'>
+                <div className='flex items-center gap-2'>
+                  <img
+                    src={user.avatarUrl}
+                    alt={user.username}
+                    className='w-8 h-8 rounded-lg'
+                  />
+                  <span className='text-lg font-medium'>{user.username}</span>
+                </div>
+              </div>
+              <button className='' title='Đăng xuất' onClick={handleLogout}>
+                <div className='flex items-center gap-2'>
+                  <LogOut className='w-4 h-4 text-red-500' />
+                  <span>Đăng xuất</span>
+                </div>
               </button>
             </div>
           ) : (

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import CategoryFilter from "../components/CategoryFilter";
-import ImageGrid from "../components/ImageGrid";
-import LoadingSpinner from "../components/LoadingSpinner";
-import "../styles/Home.css";
+import React, { useState, useEffect } from 'react';
+import Header from '../components/Header';
+import CategoryFilter from '../components/CategoryFilter';
+import ImageGrid from '../components/ImageGrid';
+import LoadingSpinner from '../components/LoadingSpinner';
+import '../styles/Home.css';
 
 function Home() {
   const [images, setImages] = useState([]);
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
@@ -19,10 +19,10 @@ function Home() {
         setLoading(true);
         const [picturesRes, uppicturesRes, usersRes, categoriesRes] =
           await Promise.all([
-            fetch("http://localhost:5000/pictures"),
-            fetch("http://localhost:5000/uppicture"),
-            fetch("http://localhost:5000/users"),
-            fetch("http://localhost:5000/categories"),
+            fetch('http://localhost:5000/pictures'),
+            fetch('http://localhost:5000/uppicture'),
+            fetch('http://localhost:5000/users'),
+            fetch('http://localhost:5000/categories'),
           ]);
 
         const picturesData = await picturesRes.json();
@@ -32,11 +32,11 @@ function Home() {
 
         const picturesTagged = picturesData.map((p) => ({
           ...p,
-          _source: "pictures",
+          _source: 'pictures',
         }));
         const uppicturesTagged = uppicturesData.map((p) => ({
           ...p,
-          _source: "uppicture",
+          _source: 'uppicture',
           user_id: p.user_id ?? 2,
         }));
         const combined = [...picturesTagged, ...uppicturesTagged];
@@ -44,7 +44,7 @@ function Home() {
         setUsers(usersData);
         setCategories(categoriesData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
@@ -70,9 +70,9 @@ function Home() {
   });
 
   return (
-    <div className="home">
+    <div className='home'>
       <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-      <div className="home-content">
+      <div className='home-content'>
         <CategoryFilter
           categories={categories}
           selectedCategory={selectedCategory}
