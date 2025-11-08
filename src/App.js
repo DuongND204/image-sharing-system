@@ -6,6 +6,8 @@ import LoginPage from './pages/auth/Login';
 import RegisterPage from './pages/auth/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminUI from './usermanagement/AdminUI';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />
-
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
         <Route
           path='/image/:id'
           element={
