@@ -3,9 +3,9 @@ import { useAuthStore } from "../store/useAuthStore";
 
 // Protected Route
 export default function ProtectedRoute({ children }) {
-  const { authUser } = useAuthStore();
+  const { user, isAuthenticated } = useAuthStore();
 
-  if (!authUser) {
+  if (!user || !isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 

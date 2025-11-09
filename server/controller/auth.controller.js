@@ -42,6 +42,48 @@ const register = async (req, res) => {
     avatarUrl: `https://api.dicebear.com/9.x/pixel-art-neutral/png?seed=${username}`,
   });
   const token = generateToken(user._id);
+  
+  // Tự động tạo user trong JSON server
+  try {
+    // Lấy danh sách users để tìm ID lớn nhất
+    const usersRes = await fetch('http://localhost:5000/users');
+    if (!usersRes.ok) {
+      throw new Error(`Failed to fetch users: ${usersRes.statusText}`);
+    }
+    const allUsers = await usersRes.json();
+    const maxId = allUsers.length > 0 ? Math.max(...allUsers.map(u => u.id)) : 0;
+    const newUserId = maxId + 1;
+    
+    const newUser = {
+      id: newUserId,
+      username: user.username,
+      email: user.email,
+      password: '', // Không lưu password trong JSON server
+      role: 'user',
+      status: 'active',
+      created_at: new Date().toISOString(),
+      avatar_url: user.avatarUrl
+    };
+    
+    // Tạo user mới trong JSON server
+    const createUserRes = await fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newUser)
+    });
+    
+    if (createUserRes.ok) {
+      console.log(`✅ Đã tạo user trong JSON server với ID: ${newUserId}`);
+    } else {
+      const errorText = await createUserRes.text();
+      console.error('⚠️ Không thể tạo user trong JSON server:', errorText);
+    }
+  } catch (error) {
+    // Không fail đăng ký nếu không tạo được trong JSON server
+    // User vẫn có thể đăng ký thành công, sẽ được tạo khi vào trang quản lý ảnh
+    console.error('⚠️ Lỗi khi tạo user trong JSON server:', error.message);
+  }
+  
   res.status(201).json({ message: 'Register successful', user, token });
 };
 

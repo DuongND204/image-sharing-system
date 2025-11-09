@@ -33,7 +33,11 @@ function Header({ searchQuery, onSearchChange }) {
         <div className='user-menu'>
           {isAuthenticated ? (
             <div className='flex gap-2'>
-              <div className='user-btn'>
+              <div 
+                className='user-btn' 
+                onClick={() => navigate('/user')}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className='flex items-center gap-2'>
                   <img
                     src={user.avatarUrl}
