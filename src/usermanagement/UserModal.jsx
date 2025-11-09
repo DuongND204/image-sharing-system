@@ -1,67 +1,84 @@
-// src/user/UserModal.jsx
-import { useState, useEffect } from "react";
-import { Modal, Button, Form, Image } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
+import * as yup from "yup";
+import { useEffect, useState } from "react";
+import { toBase64 } from "../utils/toBase64";
 
-export default function UserModal({ show, onClose, onSave, user }) {
+const schema = yup.object({
+  username: yup.string().required(),
+  email: yup.string().email().required(),
+  role: yup.string().required(),
+});
+
+export default function UserModal({ show, hide, initial, onSubmit }) {
   const [form, setForm] = useState({
     username: "",
     email: "",
     role: "user",
-    avatar_url: "",
+    avatarUrl: "",
   });
 
-  useEffect(() => {
-    if (user) setForm(user);
-    else setForm({ username: "", email: "", role: "user", avatar_url: "" });
-  }, [user]);
+  const [errors, setErrors] = useState({});
+  const [uploading, setUploading] = useState(false);
 
-  // Chuyển ảnh sang base64
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setForm({ ...form, avatar_url: reader.result });
-    };
-    reader.readAsDataURL(file);
+  useEffect(() => {
+    if (initial) setForm(initial);
+  }, [initial]);
+
+  const setValue = (key, value) => setForm({ ...form, [key]: value });
+
+  const handleSubmit = async () => {
+    try {
+      await schema.validate(form, { abortEarly: false });
+      onSubmit(form);
+    } catch (err) {
+      const errs = {};
+      err.inner.forEach((e) => (errs[e.path] = e.message));
+      setErrors(errs);
+    }
   };
 
-  const handleSave = () => {
-    onSave(form);
+  const handleAvatar = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    const base64 = await toBase64(file);
+    setUploading(false);
+
+    setValue("avatarUrl", base64);
   };
 
   return (
-    <Modal show={show} onHide={onClose} centered>
+    <Modal show={show} onHide={hide}>
       <Modal.Header closeButton>
-        <Modal.Title>{user ? "Edit User" : "Add User"}</Modal.Title>
+        <Modal.Title>{initial ? "Edit User" : "Add User"}</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-2">
             <Form.Label>Username</Form.Label>
             <Form.Control
-              type="text"
               value={form.username}
-              onChange={(e) => setForm({ ...form, username: e.target.value })}
-              placeholder="Enter username"
+              isInvalid={!!errors.username}
+              onChange={(e) => setValue("username", e.target.value)}
             />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-2">
             <Form.Label>Email</Form.Label>
             <Form.Control
-              type="email"
               value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              placeholder="Enter email"
+              isInvalid={!!errors.email}
+              onChange={(e) => setValue("email", e.target.value)}
             />
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-2">
             <Form.Label>Role</Form.Label>
             <Form.Select
               value={form.role}
-              onChange={(e) => setForm({ ...form, role: e.target.value })}
+              onChange={(e) => setValue("role", e.target.value)}
             >
               <option value="user">User</option>
               <option value="moderator">Moderator</option>
@@ -69,30 +86,33 @@ export default function UserModal({ show, onClose, onSave, user }) {
             </Form.Select>
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-2">
             <Form.Label>Avatar</Form.Label>
-            <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
-            {form.avatar_url && (
-              <div className="text-center mt-3">
-                <Image
-                  src={form.avatar_url}
-                  roundedCircle
-                  width={100}
-                  height={100}
-                  alt="Avatar preview"
-                />
-              </div>
+            <Form.Control
+              type="file"
+              accept="image/*"
+              onChange={handleAvatar}
+            />
+
+            {uploading && <div className="mt-2">Converting...</div>}
+
+            {form.avatarUrl && (
+              <img
+                src={form.avatarUrl}
+                alt="avatar"
+                className="mt-2"
+                width={80}
+                height={80}
+                style={{ borderRadius: "8px" }}
+              />
             )}
           </Form.Group>
         </Form>
       </Modal.Body>
+
       <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={handleSave}>
-          {user ? "Update" : "Add"}
-        </Button>
+        <Button variant="secondary" onClick={hide}>Cancel</Button>
+        <Button variant="primary" onClick={handleSubmit}>Save</Button>
       </Modal.Footer>
     </Modal>
   );
