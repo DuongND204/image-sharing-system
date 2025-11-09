@@ -104,8 +104,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-15T18:30:00Z",
-      "likes_count": 45,
-      "comments_count": 8
+      "likes_count": 2,
+      "comments_count": 2
     },
     {
       "id": 2,
@@ -117,8 +117,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-20T12:15:00Z",
-      "likes_count": 62,
-      "comments_count": 12
+      "likes_count": 2,
+      "comments_count": 2
     },
     {
       "id": 3,
@@ -130,8 +130,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-22T20:00:00Z",
-      "likes_count": 38,
-      "comments_count": 5
+      "likes_count": 3,
+      "comments_count": 2
     },
     {
       "id": 4,
@@ -143,8 +143,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-25T08:45:00Z",
-      "likes_count": 89,
-      "comments_count": 15
+      "likes_count": 1,
+      "comments_count": 1
     },
     {
       "id": 5,
@@ -156,8 +156,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-28T09:30:00Z",
-      "likes_count": 23,
-      "comments_count": 3
+      "likes_count": 2,
+      "comments_count": 1
     },
     {
       "id": 6,
@@ -169,8 +169,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-29T15:20:00Z",
-      "likes_count": 56,
-      "comments_count": 9
+      "likes_count": 3,
+      "comments_count": 2
     },
     {
       "id": 7,
@@ -182,8 +182,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-30T10:15:00Z",
-      "likes_count": 34,
-      "comments_count": 7
+      "likes_count": 2,
+      "comments_count": 1
     },
     {
       "id": 8,
@@ -195,8 +195,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-10-31T14:00:00Z",
-      "likes_count": 41,
-      "comments_count": 10
+      "likes_count": 3,
+      "comments_count": 2
     },
     {
       "id": 9,
@@ -208,8 +208,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-11-01T11:30:00Z",
-      "likes_count": 67,
-      "comments_count": 14
+      "likes_count": 2,
+      "comments_count": 1
     },
     {
       "id": 10,
@@ -221,8 +221,8 @@
       "visibility": "public",
       "is_hidden": false,
       "upload_date": "2024-11-02T09:45:00Z",
-      "likes_count": 78,
-      "comments_count": 11
+      "likes_count": 3,
+      "comments_count": 2
     }
   ],
   "boards": [
@@ -280,70 +280,400 @@
   "likes": [
     {
       "id": 1,
-      "user_id": 3,
-      "picture_id": 1,
-      "liked_at": "2024-10-15T19:00:00Z"
+      "imageId": "1",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-10-15T19:00:00Z"
     },
     {
       "id": 2,
-      "user_id": 5,
-      "picture_id": 1,
-      "liked_at": "2024-10-16T10:30:00Z"
+      "imageId": "1",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-10-16T10:30:00Z"
     },
     {
       "id": 3,
-      "user_id": 2,
-      "picture_id": 2,
-      "liked_at": "2024-10-20T14:00:00Z"
+      "imageId": "2",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-10-20T14:00:00Z"
     },
     {
       "id": 4,
-      "user_id": 5,
-      "picture_id": 2,
-      "liked_at": "2024-10-21T08:15:00Z"
+      "imageId": "2",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-10-21T08:15:00Z"
     },
     {
       "id": 5,
-      "user_id": 3,
-      "picture_id": 4,
-      "liked_at": "2024-10-25T10:00:00Z"
+      "imageId": "4",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-10-25T10:00:00Z"
+    },
+    {
+      "imageId": "2",
+      "source": "uppicture",
+      "userName": "taitran",
+      "createdAt": "2025-11-09T11:14:41.470Z",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "imageId": "3",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-10-23T08:00:00Z"
+    },
+    {
+      "id": 8,
+      "imageId": "3",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-10-23T09:00:00Z"
+    },
+    {
+      "id": 9,
+      "imageId": "3",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-10-23T10:00:00Z"
+    },
+    {
+      "id": 10,
+      "imageId": "5",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-10-28T11:00:00Z"
+    },
+    {
+      "id": 11,
+      "imageId": "5",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-10-28T12:00:00Z"
+    },
+    {
+      "id": 12,
+      "imageId": "6",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-10-30T08:00:00Z"
+    },
+    {
+      "id": 13,
+      "imageId": "6",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-10-30T09:00:00Z"
+    },
+    {
+      "id": 14,
+      "imageId": "6",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-10-30T10:00:00Z"
+    },
+    {
+      "id": 15,
+      "imageId": "7",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-10-31T08:00:00Z"
+    },
+    {
+      "id": 16,
+      "imageId": "7",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-10-31T09:00:00Z"
+    },
+    {
+      "id": 17,
+      "imageId": "8",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-11-01T08:00:00Z"
+    },
+    {
+      "id": 18,
+      "imageId": "8",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-11-01T09:00:00Z"
+    },
+    {
+      "id": 19,
+      "imageId": "8",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-11-01T10:00:00Z"
+    },
+    {
+      "id": 20,
+      "imageId": "9",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-11-02T08:00:00Z"
+    },
+    {
+      "id": 21,
+      "imageId": "9",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-11-02T09:00:00Z"
+    },
+    {
+      "id": 22,
+      "imageId": "10",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "createdAt": "2024-11-03T08:00:00Z"
+    },
+    {
+      "id": 23,
+      "imageId": "10",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "createdAt": "2024-11-03T09:00:00Z"
+    },
+    {
+      "id": 24,
+      "imageId": "10",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "createdAt": "2024-11-03T10:00:00Z"
+    },
+    {
+      "imageId": "4",
+      "source": "pictures",
+      "userName": "taitran",
+      "createdAt": "2025-11-09T11:18:01.192Z",
+      "id": 25
+    },
+    {
+      "imageId": "3",
+      "source": "pictures",
+      "userName": "taitran",
+      "createdAt": "2025-11-09T11:18:06.868Z",
+      "id": 26
+    },
+    {
+      "imageId": "1",
+      "source": "pictures",
+      "userName": "taitran",
+      "createdAt": "2025-11-09T11:18:14.358Z",
+      "id": 28
+    },
+    {
+      "imageId": "7",
+      "source": "pictures",
+      "userName": "taitran",
+      "createdAt": "2025-11-09T11:18:17.139Z",
+      "id": 29
+    },
+    {
+      "imageId": "2",
+      "source": "pictures",
+      "userName": "trantai",
+      "createdAt": "2025-11-09T11:18:48.168Z",
+      "id": 30
     }
   ],
   "comments": [
     {
       "id": 1,
-      "picture_id": 1,
-      "user_id": 3,
-      "comment_text": "Amazing colors!",
-      "commented_at": "2024-10-15T19:15:00Z"
+      "imageId": "1",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "Amazing colors!",
+      "createdAt": "2024-10-15T19:15:00Z"
     },
     {
       "id": 2,
-      "picture_id": 1,
-      "user_id": 5,
-      "comment_text": "This is breathtaking!",
-      "commented_at": "2024-10-16T11:00:00Z"
+      "imageId": "1",
+      "source": "pictures",
+      "userId": 5,
+      "userName": "photo_enthusiast",
+      "userAvatar": "https://i.pravatar.cc/150?img=5",
+      "text": "This is breathtaking!",
+      "createdAt": "2024-10-16T11:00:00Z"
     },
     {
       "id": 3,
-      "picture_id": 2,
-      "user_id": 2,
-      "comment_text": "Which mountain is this?",
-      "commented_at": "2024-10-20T14:30:00Z"
+      "imageId": "2",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Which mountain is this?",
+      "createdAt": "2024-10-20T14:30:00Z"
     },
     {
       "id": 4,
-      "picture_id": 2,
-      "user_id": 3,
-      "comment_text": "It's in the Swiss Alps!",
-      "commented_at": "2024-10-20T15:00:00Z"
+      "imageId": "2",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "It's in the Swiss Alps!",
+      "createdAt": "2024-10-20T15:00:00Z"
     },
     {
       "id": 5,
-      "picture_id": 4,
-      "user_id": 3,
-      "comment_text": "Beautiful capture!",
-      "commented_at": "2024-10-25T10:30:00Z"
+      "imageId": "4",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "Beautiful capture!",
+      "createdAt": "2024-10-25T10:30:00Z"
+    },
+    {
+      "imageId": "2",
+      "source": "uppicture",
+      "userName": "taitran",
+      "userAvatar": "https://api.dicebear.com/9.x/pixel-art-neutral/png?seed=taitran",
+      "text": "beautiful",
+      "createdAt": "2025-11-09T11:14:52.845Z",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "imageId": "3",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Great night photography!",
+      "createdAt": "2024-10-23T08:30:00Z"
+    },
+    {
+      "id": 8,
+      "imageId": "3",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "The lighting is perfect!",
+      "createdAt": "2024-10-23T09:30:00Z"
+    },
+    {
+      "id": 9,
+      "imageId": "5",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Love the latte art!",
+      "createdAt": "2024-10-28T11:30:00Z"
+    },
+    {
+      "id": 10,
+      "imageId": "6",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Such vibrant green colors!",
+      "createdAt": "2024-10-30T08:30:00Z"
+    },
+    {
+      "id": 11,
+      "imageId": "6",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "Spring is beautiful!",
+      "createdAt": "2024-10-30T09:30:00Z"
+    },
+    {
+      "id": 12,
+      "imageId": "7",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Modern art at its best!",
+      "createdAt": "2024-10-31T08:30:00Z"
+    },
+    {
+      "id": 13,
+      "imageId": "8",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Great tech showcase!",
+      "createdAt": "2024-11-01T08:30:00Z"
+    },
+    {
+      "id": 14,
+      "imageId": "8",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "Innovation everywhere!",
+      "createdAt": "2024-11-01T09:30:00Z"
+    },
+    {
+      "id": 15,
+      "imageId": "9",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "Stunning fashion!",
+      "createdAt": "2024-11-02T08:30:00Z"
+    },
+    {
+      "id": 16,
+      "imageId": "10",
+      "source": "pictures",
+      "userId": 2,
+      "userName": "john_doe",
+      "userAvatar": "https://i.pravatar.cc/150?img=2",
+      "text": "Perfect tropical paradise!",
+      "createdAt": "2024-11-03T08:30:00Z"
+    },
+    {
+      "id": 17,
+      "imageId": "10",
+      "source": "pictures",
+      "userId": 3,
+      "userName": "jane_smith",
+      "userAvatar": "https://i.pravatar.cc/150?img=3",
+      "text": "I want to go there!",
+      "createdAt": "2024-11-03T09:30:00Z"
     }
   ],
   "follows": [
