@@ -5,9 +5,9 @@ import UserManager from './pages/UserManager';
 import LoginPage from './pages/auth/Login';
 import RegisterPage from './pages/auth/Register';
 import ProtectedRoute from './components/ProtectedRoute';
-import AdminUI from './usermanagement/AdminUI';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import AdminUserPage from './usermanagement/AdminUserPage';
 
 function App() {
   return (
@@ -45,9 +45,9 @@ function App() {
         <Route
           path='/admin'
           element={
-            <ProtectedRoute>
-              <AdminUI />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+              <AdminUserPage />
+            // </ProtectedRoute>
           }
         />
       </Routes>

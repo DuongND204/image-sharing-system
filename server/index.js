@@ -9,6 +9,7 @@ import usersRouter from './routes/users.js';
 import imagesRouter from './routes/images.js';
 import authRouter from './routes/auth.js';
 import connectDb from './configs/db.js';
+import adminManagerRouter from './routes/userRoutes.js';
 const PORT = process.env.PORT || 4000;
 
 dotenv.config();
@@ -31,6 +32,7 @@ app.use('/uploads', express.static(uploadsDir));
 app.use('/api/users', usersRouter);
 app.use('/api/images', imagesRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/admin/users', adminManagerRouter);
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
