@@ -3,9 +3,10 @@ import { useAuthStore } from "../store/useAuthStore";
 
 // Protected Route
 export default function ProtectedRoute({ children }) {
-  const { user, isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user, token } = useAuthStore();
 
-  if (!user || !isAuthenticated) {
+  // Kiểm tra authentication: cần có token và user
+  if (!token) {
     return <Navigate to="/login" replace />;
   }
 

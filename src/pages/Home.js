@@ -17,28 +17,53 @@ function Home() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [picturesRes, uppicturesRes, usersRes, categoriesRes] =
+        const [picturesRes, uppicturesRes, usersRes, categoriesRes, commentsRes, likesRes] =
           await Promise.all([
             fetch('http://localhost:5000/pictures'),
             fetch('http://localhost:5000/uppicture'),
             fetch('http://localhost:5000/users'),
             fetch('http://localhost:5000/categories'),
+            fetch('http://localhost:5000/comments'),
+            fetch('http://localhost:5000/likes'),
           ]);
 
         const picturesData = await picturesRes.json();
         const uppicturesData = await uppicturesRes.json();
         const usersData = await usersRes.json();
         const categoriesData = await categoriesRes.json();
+        const commentsData = await commentsRes.json();
+        const likesData = await likesRes.json();
 
+        // Tạo map để đếm
+        const commentCountMap = {};
+        const likeCountMap = {};
+
+        commentsData.forEach((comment) => {
+          const imgId = String(comment.imageId);
+          commentCountMap[imgId] = (commentCountMap[imgId] || 0) + 1;
+        });
+
+        likesData.forEach((like) => {
+          const imgId = String(like.imageId);
+          likeCountMap[imgId] = (likeCountMap[imgId] || 0) + 1;
+        });
+
+        // Cập nhật counts từ json-server
         const picturesTagged = picturesData.map((p) => ({
           ...p,
           _source: 'pictures',
+          likes_count: likeCountMap[String(p.id)] || 0,
+          comments_count: commentCountMap[String(p.id)] || 0,
         }));
+
         const uppicturesTagged = uppicturesData.map((p) => ({
           ...p,
           _source: 'uppicture',
           user_id: p.user_id ?? 2,
+          likes_count: likeCountMap[String(p.id)] || 0,
+          comments_count: commentCountMap[String(p.id)] || 0,
         }));
+
         const combined = [...picturesTagged, ...uppicturesTagged];
         setImages(combined);
         setUsers(usersData);
