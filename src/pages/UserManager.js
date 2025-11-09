@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Header from '../components/Header';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuthStore } from '../store/useAuthStore';
 import '../styles/Home.css';
 import '../styles/UserManager.css';
 
 function UserManager() {
+  const { user } = useAuthStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [pictures, setPictures] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -12,7 +14,8 @@ function UserManager() {
   const [editingId, setEditingId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const FIXED_USER_ID = 2; // user mặc định nếu chưa đăng nhập
+  const [currentUserId, setCurrentUserId] = useState(null);
+  
   const [form, setForm] = useState({
     user_id: 2,
     title: '',
@@ -30,12 +33,104 @@ function UserManager() {
   const loadData = async () => {
     try {
       setLoading(true);
-      const [picsRes, catsRes] = await Promise.all([
+      const [picsRes, catsRes, usersRes] = await Promise.all([
         fetch('http://localhost:5000/uppicture'),
         fetch('http://localhost:5000/categories'),
+        fetch('http://localhost:5000/users'),
       ]);
-      setPictures(await picsRes.json());
+      const allPictures = await picsRes.json();
+      const allUsers = await usersRes.json();
       setCategories(await catsRes.json());
+      
+      // Tìm user_id tương ứng với user hiện tại
+      let userId = null;
+      if (user) {
+        // Tìm user trong JSON server theo email hoặc username (case-insensitive)
+        const matchedUser = allUsers.find(
+          (u) => 
+            (u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase()) ||
+            (u.username && user.username && u.username.toLowerCase() === user.username.toLowerCase())
+        );
+        
+        if (matchedUser) {
+          userId = matchedUser.id;
+          setCurrentUserId(userId);
+        } else {
+          // Nếu không tìm thấy user trong JSON server, tự động tạo user mới
+          try {
+            const maxId = allUsers.length > 0 ? Math.max(...allUsers.map(u => u.id)) : 0;
+            const newUserId = maxId + 1;
+            
+            const newUser = {
+              id: newUserId,
+              username: user.username || `user_${newUserId}`,
+              email: user.email || '',
+              password: '', // Không lưu password trong JSON server
+              role: 'user',
+              status: 'active',
+              created_at: new Date().toISOString(),
+              avatar_url: user.avatarUrl || `https://api.dicebear.com/9.x/pixel-art-neutral/png?seed=${user.username}`
+            };
+            
+            // Tạo user mới trong JSON server
+            const createUserRes = await fetch('http://localhost:5000/users', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newUser)
+            });
+            
+            if (createUserRes.ok) {
+              const createdUser = await createUserRes.json();
+              userId = createdUser.id;
+              setCurrentUserId(userId);
+              console.log('Đã tạo user mới trong JSON server:', userId);
+            } else {
+              // Nếu tạo thất bại, thử tìm lại một lần nữa (có thể đã được tạo từ auth controller)
+              const retryUsersRes = await fetch('http://localhost:5000/users');
+              const retryUsers = await retryUsersRes.json();
+              const retryMatchedUser = retryUsers.find(
+                (u) => 
+                  (u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase()) ||
+                  (u.username && user.username && u.username.toLowerCase() === user.username.toLowerCase())
+              );
+              if (retryMatchedUser) {
+                userId = retryMatchedUser.id;
+                setCurrentUserId(userId);
+                console.log('Đã tìm thấy user sau khi retry:', userId);
+              }
+            }
+          } catch (createError) {
+            console.error('Lỗi khi tạo user trong JSON server:', createError);
+            // Thử tìm lại một lần nữa
+            try {
+              const retryUsersRes = await fetch('http://localhost:5000/users');
+              const retryUsers = await retryUsersRes.json();
+              const retryMatchedUser = retryUsers.find(
+                (u) => 
+                  (u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase()) ||
+                  (u.username && user.username && u.username.toLowerCase() === user.username.toLowerCase())
+              );
+              if (retryMatchedUser) {
+                userId = retryMatchedUser.id;
+                setCurrentUserId(userId);
+                console.log('Đã tìm thấy user sau khi retry (catch):', userId);
+              }
+            } catch (retryError) {
+              console.error('Lỗi khi retry tìm user:', retryError);
+            }
+          }
+        }
+      }
+      
+      // Filter ảnh theo user_id của user hiện tại
+      if (userId) {
+        setPictures(allPictures.filter((p) => p.user_id === userId));
+        setForm((prev) => ({ ...prev, user_id: userId }));
+      } else {
+        // Nếu vẫn không có user_id, không hiển thị ảnh nào
+        setPictures([]);
+        setCurrentUserId(null);
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -45,7 +140,7 @@ function UserManager() {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [user]);
 
   // Open edit modal if redirected with editId
   const location = useLocation();
@@ -57,7 +152,7 @@ function UserManager() {
       if (item) {
         setEditingId(item.id);
         setForm({
-          user_id: item.user_id || 2,
+          user_id: item.user_id || currentUserId || 2,
           title: item.title || '',
           description: item.description || '',
           image_url: item.image_url || '',
@@ -75,7 +170,7 @@ function UserManager() {
   const resetForm = () => {
     setEditingId(null);
     setForm({
-      user_id: FIXED_USER_ID,
+      user_id: currentUserId || 2,
       title: '',
       description: '',
       image_url: '',
@@ -100,6 +195,65 @@ function UserManager() {
       alert('Vui lòng chọn ảnh từ máy.');
       return;
     }
+    
+    // Đảm bảo có user_id hợp lệ
+    let userId = form.user_id;
+    if (!userId || userId === 2) {
+      // Nếu chưa có user_id hoặc là giá trị mặc định, thử tìm/tạo lại
+      if (user) {
+        try {
+          const usersRes = await fetch('http://localhost:5000/users');
+          const allUsers = await usersRes.json();
+          const matchedUser = allUsers.find(
+            (u) => 
+              (u.email && user.email && u.email.toLowerCase() === user.email.toLowerCase()) ||
+              (u.username && user.username && u.username.toLowerCase() === user.username.toLowerCase())
+          );
+          
+          if (matchedUser) {
+            userId = matchedUser.id;
+            setCurrentUserId(userId);
+          } else {
+            // Tạo user mới nếu chưa có
+            const maxId = allUsers.length > 0 ? Math.max(...allUsers.map(u => u.id)) : 0;
+            const newUserId = maxId + 1;
+            const newUser = {
+              id: newUserId,
+              username: user.username || `user_${newUserId}`,
+              email: user.email || '',
+              password: '',
+              role: 'user',
+              status: 'active',
+              created_at: new Date().toISOString(),
+              avatar_url: user.avatarUrl || `https://api.dicebear.com/9.x/pixel-art-neutral/png?seed=${user.username}`
+            };
+            
+            const createUserRes = await fetch('http://localhost:5000/users', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newUser)
+            });
+            
+            if (createUserRes.ok) {
+              const createdUser = await createUserRes.json();
+              userId = createdUser.id;
+              setCurrentUserId(userId);
+            } else {
+              alert('Không thể tạo tài khoản trong hệ thống. Vui lòng thử lại.');
+              return;
+            }
+          }
+        } catch (error) {
+          console.error('Lỗi khi tìm/tạo user:', error);
+          alert('Có lỗi xảy ra. Vui lòng thử lại.');
+          return;
+        }
+      } else {
+        alert('Bạn cần đăng nhập để thêm ảnh.');
+        return;
+      }
+    }
+    
     let imageUrl = '';
     try {
       imageUrl = await fileToDataUrl(form.image_file);
@@ -111,7 +265,7 @@ function UserManager() {
     const payload = {
       ...rest,
       image_url: imageUrl,
-      user_id: Number(FIXED_USER_ID),
+      user_id: Number(userId),
       category_id: form.category_id === '' ? null : Number(form.category_id),
       upload_date: new Date().toISOString(),
       likes_count: 0,
@@ -146,7 +300,7 @@ function UserManager() {
   const handleEdit = (item) => {
     setEditingId(item.id);
     setForm({
-      user_id: item.user_id || FIXED_USER_ID,
+      user_id: item.user_id || currentUserId || 2,
       title: item.title,
       description: item.description,
       image_url: item.image_url,
@@ -186,13 +340,35 @@ function UserManager() {
       <div className="home-content user-manager">
         <div className="um-toolbar">
           <div className="um-title">Quản lý ảnh </div>
-          <button className="um-upload-btn" onClick={() => { resetForm(); setIsModalOpen(true); }}>
+          <button className="um-upload-btn" onClick={async () => { 
+            // Đảm bảo có currentUserId trước khi mở modal
+            if (!currentUserId && user) {
+              // Nếu chưa có user_id, thử tìm/tạo lại
+              await loadData();
+            }
+            resetForm(); 
+            setIsModalOpen(true); 
+          }}>
             + Ghim 
           </button>
         </div>
 
         {loading ? (
           <div className="um-loading">Đang tải...</div>
+        ) : !currentUserId && user ? (
+          <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+            <p>Không tìm thấy tài khoản của bạn trong hệ thống.</p>
+            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+              Vui lòng đăng xuất và đăng nhập lại, hoặc liên hệ quản trị viên.
+            </p>
+          </div>
+        ) : filteredPictures.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+            <p>Bạn chưa có ảnh nào.</p>
+            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+              Nhấn nút "+ Ghim" để thêm ảnh đầu tiên của bạn!
+            </p>
+          </div>
         ) : (
           <div className="masonry-grid">
             {filteredPictures.map((p) => (

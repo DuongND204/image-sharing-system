@@ -1,0 +1,9 @@
+# Tự động xử lý line endings
+* text=auto
+
+# JSON files - giữ nguyên line endings hiện tại
+*.json text eol=lf
+
+# Database file - giữ nguyên
+database.json text eol=lf
+
